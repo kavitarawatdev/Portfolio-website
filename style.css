@@ -6,6 +6,7 @@
 }
 
 :root {
+  --nav: rgba(124, 122, 252, 0.493);
   --footer:rgb(0 10 45);
   --header:#6f7dff;
   --bg:#f3f4ff;
@@ -31,6 +32,7 @@
 }
 
 .dark-mode{
+  --nav:rgba(45, 45, 45, 0.485);
   --header:#2D2D2D;
   --para:  #EEEEEE;
   --bg:  #121212;
@@ -915,7 +917,7 @@ font-size: 3rem;
     position: absolute;
     left: 0;
     top: -1000%;
-    background:  rgba(124, 122, 252, 0.493);
+    background:  var(--nav);
     display: flex;
     backdrop-filter: blur(10px);
     flex-direction: column;
