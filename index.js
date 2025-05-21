@@ -1,6 +1,7 @@
 // ==========================
 // gsap animation
 // ==============================
+gsap.registerPlugin(ScrollTrigger);
 const tl = gsap.timeline();
 tl.to(".nav-bar", {
   duration: 0.5,
@@ -8,31 +9,136 @@ tl.to(".nav-bar", {
 })
 tl.pause();
 
-gsap.registerPlugin(ScrollTrigger);
 
-const sections = [
-  { el: ".hero-data", vars: { y: 200, duration: 1, delay: 1, start: "top 70%", end: "bottom 40%" } },
-  { el: "#about-page", vars: { y: 200, duration: 1.5, delay: 0.5, start: "top 115%", end: "bottom 20%" } },
-  { el: "#about-page .bio-data-data", vars: { y: 50, opacity: 0, stagger: 0.3, duration: 1, delay: 0.5, start: "top 110%", end: "bottom -90%" } },
-  { el: "#projects-page", vars: { y: 200, duration: 1, delay: 1, start: "top 90%", end: "bottom 20%" } },
-  { el: ".section-counter", vars: { y: 200, duration: 1, delay: 1, start: "top 90%", end: "bottom 20%" } },
-  { el: ".services-section", vars: { y: 200, duration: 1, delay: 1, start: "top 70%", end: "bottom 20%" } },
-  { el: ".testimonial-section", vars: { y: 200, duration: 1, delay: 1, start: "top 100%", end: "bottom 100%" } },
-  { el: ".freelancing-section", vars: { y: 200, duration: 1, delay: 1, start: "top 90%", end: "bottom 20%" } },
-  { el: ".contact-section", vars: { y: 200, duration: 1, delay: 1, start: "top 90%", end: "bottom 20%" } },
-];
 
-sections.forEach(({ el, vars }) => {
-  gsap.from(el, {
-    opacity: 0,
-    ...vars,
-    scrollTrigger: {
-      trigger: el,
-      start: vars.start,
-      end: vars.end,
-      markers: false,
-    },
-  });
+gsap.from(".hero-data", {
+  opacity: 0,
+  y: 200,
+  duration: 1,
+  delay: 1,
+  scrollTrigger: {
+    trigger: ".hero-data",
+    start: "top 70%",
+    end: "bottom 40%",
+    markers: false,
+  },
+
+});
+
+gsap.from("#about-page", {
+  opacity: 0,
+  y: 200,
+  duration: 1.5,
+  delay: 0.5,
+  scrollTrigger: {
+    trigger: "#about-page",
+    start: "top 115%",
+    end: "bottom 20%",
+    markers: false,
+  },
+
+});
+
+gsap.from("#about-page .bio-data-data", {
+  duration: 1,
+  delay: 0.5,
+  y: 50,
+  opacity: 0,
+  stagger: 0.3,
+  scrollTrigger: {
+    trigger: "#about-page .bio-data-data",
+    start: "top 110%",
+    end: "bottom -90%",
+    markers: false,
+  },
+
+});
+
+gsap.from("#projects-page", {
+  opacity: 0,
+  y: 200,
+  duration: 1,
+  delay: 1,
+  scrollTrigger: {
+    trigger: "#projects-page",
+    start: "top 90%",
+    end: "bottom 20%",
+    markers: false,
+  },
+
+});
+
+gsap.from(".section-counter", {
+  opacity: 0,
+  y: 200,
+  duration: 1,
+  delay: 1,
+  scrollTrigger: {
+    trigger: ".section-counter",
+    start: "top 90%",
+    end: "bottom 20%",
+    markers: false,
+  },
+
+});
+
+gsap.from(".services-section", {
+  opacity: 0,
+  y: 200,
+  duration: 1,
+  delay: 1,
+  scrollTrigger: {
+    trigger: ".services-section",
+    start: "top 70%",
+    end: "bottom 20%",
+    markers: false,
+  },
+
+});
+
+gsap.from(".testimonial-section", {
+  opacity: 0,
+  y: 200,
+  duration: 1,
+  delay: 1,
+
+  scrollTrigger: {
+    trigger: ".testimonial-section",
+    start: "top 100%",
+    end: "bottom 100%",
+    markers: false,
+  },
+
+});
+
+gsap.from(".freelancing-section", {
+  opacity: 0,
+  y: 200,
+  duration: 1,
+  delay: 1,
+
+  scrollTrigger: {
+    trigger: ".freelancing-section",
+    start: "top 90%",
+    end: "bottom 20%",
+    markers: false,
+  },
+
+});
+
+gsap.from(".contact-section", {
+  opacity: 0,
+  y: 200,
+  duration: 1,
+  delay: 1,
+
+  scrollTrigger: {
+    trigger: ".contact-section",
+    start: "top 80%",
+    end: "bottom 20%",
+    markers: false,
+  },
+
 });
 
 // ===============================================
@@ -85,53 +191,65 @@ p_btns.addEventListener("click", (e) => {
 // ===========================================
 // HANDLING THEME BTN
 // ===================================================
-const THEME_ICON=document.querySelector(".theme-btn i")
-const THEME_BTN=document.querySelector(".theme-btn")
-const body=document.querySelector('.body');
+const THEME_ICON = document.querySelector(".theme-btn i")
+const THEME_BTN = document.querySelector(".theme-btn")
+const body = document.querySelector('.body');
 // ===========================
 // loaal storage
 // ===========================
 const themeKey = "theme"; // my key
-const storedTheme = (key , theme)=>{
-    try {
-        localStorage.setItem(key, theme);
-    } catch (error) {
-        console.error("Error storing theme in localStorage:", error);
-    }
+const storedTheme = (key, theme) => {
+  try {
+    localStorage.setItem(key, theme);
+  } catch (error) {
+    console.error("Error storing theme in localStorage:", error);
+  }
 }
 
 const getTheme = (key) => {
   try {
-        const theme = localStorage.getItem(key);
-        if (theme) {
-            return theme;
-        }
-        return "dark"; // Key doesn't exist or is empty
-    } catch (error) {
-        console.error("Error getting theme from localStorage:", error);
-        return null;
+    const theme = localStorage.getItem(key);
+    if (theme) {
+      return theme;
     }
+  } catch (error) {
+    console.error("Error getting theme from localStorage:", error);
+    return null;
+  }
 }
 
-let theme=getTheme(themeKey)
-if(theme=="light"){
-     THEME_ICON.classList.remove("fa-moon");
-     THEME_ICON.classList.add("fa-sun")
-     body.classList.remove("dark-mode")
-}else{
-   THEME_ICON.classList.add("fa-moon");
-  THEME_ICON.classList.remove("fa-sun")
+let theme = getTheme(themeKey);
+console.log(theme);
+if (theme == "light") {
+  THEME_ICON.classList.remove("fa-moon");
+  THEME_ICON.classList.add("fa-sun")
+  body.classList.remove("dark-mode")
+} else {
+  theme = "dark";
+  THEME_ICON.classList.add("fa-moon");
+  THEME_ICON.classList.remove("fa-sun");
   body.classList.add("dark-mode")
 }
-const handleThemeBtn = () => {
-  THEME_ICON.classList.toggle("fa-moon");
-  THEME_ICON.classList.toggle("fa-sun");
-  body.classList.toggle("dark-mode");
-  THEME_ICON.classList.contains("dark-mode")? theme="dark":theme="light";
-  storedTheme(themeKey, theme)
+console.log(theme);
+const handleTheme = () => {
+  if (theme == "light") {
+    theme = "dark"
+    THEME_ICON.classList.add("fa-moon");
+    THEME_ICON.classList.remove("fa-sun");
+    body.classList.add("dark-mode")
+  } else {
+    theme = "light";
+    THEME_ICON.classList.remove("fa-moon");
+    THEME_ICON.classList.add("fa-sun")
+    body.classList.remove("dark-mode")
+  }
+  storedTheme(themeKey, theme);
+  console.log(theme);
 }
 
-THEME_BTN.addEventListener("click", handleThemeBtn);
+
+THEME_BTN.addEventListener("click", handleTheme);
+localStorage.removeItem(themeKey)
 // ========================================================
 //     TESTIMONIAL SECTION
 // ========================================================
