@@ -249,7 +249,6 @@ const handleTheme = () => {
 
 
 THEME_BTN.addEventListener("click", handleTheme);
-localStorage.removeItem(themeKey)
 // ========================================================
 //     TESTIMONIAL SECTION
 // ========================================================
